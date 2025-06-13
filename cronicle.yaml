@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cronicle
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cronicle
+  template:
+    metadata:
+      labels:
+        app: cronicle
+    spec:
+      containers:
+        - name: cronicle
+          image: nginxdemos/hello:0.4-plain-text 
+          ports:
+            - containerPort: 3012
+          volumeMounts:
+            - name: config
+              mountPath: /opt/cronicle/data/conf.json
+              subPath: conf.json
+      volumes:
+        - name: config
+          configMap:
+            name: cronicle-config
+---
+ 
+apiVersion: v1
+kind: Service
+metadata:
+  name: cronicle
+  namespace: default
+spec:
+  selector:
+    app: cronicle
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3012
+  type: NodePort
