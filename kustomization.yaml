@@ -5,4 +5,4 @@ configMapGenerator:
   - name: cronicle-config
     namespace: default
     files:
-      - cronicle.conf
+      - conf.json
