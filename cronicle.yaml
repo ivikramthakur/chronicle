@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cronicle
-          image: ghcr.io/jhuckaby/cronicle
+          image: ghcr.io/jhuckaby/cronicle:v1.0.0
           ports:
             - containerPort: 3012
           volumeMounts:
