@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cronicle
-  namespace: default
 spec:
   replicas: 1
   selector:
@@ -15,29 +14,24 @@ spec:
     spec:
       containers:
         - name: cronicle
-          image: ghcr.io/jhuckaby/cronicle:v1.0.0
+          image: yourdockeruser/cronicle:latest
           ports:
             - containerPort: 3012
           volumeMounts:
-            - name: config
-              mountPath: /opt/cronicle/data/conf.json
-              subPath: conf.json
+            - mountPath: /opt/cronicle/data
+              name: cronicle-data
       volumes:
-        - name: config
-          configMap:
-            name: cronicle-config
+        - name: cronicle-data
+          emptyDir: {}
 ---
- 
 apiVersion: v1
 kind: Service
 metadata:
   name: cronicle
-  namespace: default
 spec:
   selector:
     app: cronicle
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3012
-  type: NodePort
+    - port: 80
+      targetPort: 3012
+      protocol: TCP
