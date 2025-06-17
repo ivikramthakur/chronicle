@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: cronicle
-          image: yourdockeruser/cronicle:latest
+          image: jhuckaby/cronicle
           ports:
             - containerPort: 3012
           volumeMounts:
