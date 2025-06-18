@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cronicle
-          image: nginxdemos/hello:0.4-plain-text 
+          image: ghcr.io/jhuckaby/cronicle:v1.0.0
           ports:
             - containerPort: 3012
           volumeMounts:
